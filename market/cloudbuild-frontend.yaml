@@ -29,16 +29,16 @@ steps:
       - BACKEND_URL=${_BACKEND_URL},WS_GATEWAY_URL=${_WS_GATEWAY_URL}
 
 substitutions:
-  # Replace placeholder in trigger: <region>-docker.pkg.dev/<PROJECT_ID>/<repository>
   _ARTIFACT_REGISTRY_URL: europe-west1-docker.pkg.dev/REPLACE-WITH-PROJECT-ID/market
   _IMAGE_NAME: frontend
   _SERVICE_NAME: market-frontend
   _REGION: europe-west1
-  # Deploy order: API + WS first, then set their URLs here before frontend deploy.
-  # Replace with real Cloud Run URL of deployed API service.
+  # Tyhle dvě hodnoty přepíšeš v triggeru na skutečné URL z Cloud Run:
   _BACKEND_URL: https://market-api-REPLACE-WITH-SERVICE-ID-ew.a.run.app
-  # Replace with real Cloud Run URL of deployed WS gateway service.
   _WS_GATEWAY_URL: https://market-ws-gateway-REPLACE-WITH-SERVICE-ID-ew.a.run.app
 
 images:
   - ${_ARTIFACT_REGISTRY_URL}/${_IMAGE_NAME}:${SHORT_SHA}
+
+options:
+  logging: CLOUD_LOGGING_ONLY
