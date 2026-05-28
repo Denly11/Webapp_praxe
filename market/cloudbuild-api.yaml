@@ -20,7 +20,7 @@ steps:
       - |
         ARGS=(
           run deploy "${_SERVICE_NAME}"
-          --image "${IMAGE}"
+          --image "${_IMAGE}"
           --region "${_REGION}"
           --platform managed
           --allow-unauthenticated
