@@ -1,0 +1,7 @@
+# Repo root: pouze market/ a README.md
+.cursor/
+.vscode/
+docs/
+Logs/
+.worktrees/
+plan-document-reviewer-prompt.md

@@ -100,9 +100,10 @@ if ($redisUrl !== '') {
 
         $redisClient = new Market\Infrastructure\Storage\Redis\RedisClient($redisUrl, $redisPrefix);
         if (!$redisClient->ping()) {
-            $redisClient = null;
+            throw new RuntimeException('Nelze se spojit s Redisem');
         }
-    } catch (Throwable) {
+    } catch (Throwable $e) {
+        error_log("REDIS CHYBA: " . $e->getMessage());
         $redisClient = null;
     }
 }
@@ -211,7 +212,7 @@ $orderCancellationService = new Market\Application\OrderCancellationService(
 $controllers = [
     'asset' => new Market\Controller\AssetController($assetService),
     'portfolio' => new Market\Controller\PortfolioController($portfolioService),
-    'order' => new Market\Controller\OrderController($orderService),
+    'order' => new Market\Controller\OrderController($orderService, $orderCancellationService),
     'session' => new Market\Controller\SessionController(
         $sessionService,
         $leaderboardService,
