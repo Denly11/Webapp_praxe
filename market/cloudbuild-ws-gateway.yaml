@@ -18,10 +18,9 @@ steps:
     args:
       - -ceu
       - |
-        IMAGE="${_ARTIFACT_REGISTRY_URL}/${_IMAGE_NAME}:${SHORT_SHA}"
         ARGS=(
           run deploy "${_SERVICE_NAME}"
-          --image "${IMAGE}"
+          --image "${_IMAGE}"
           --region "${_REGION}"
           --platform managed
           --allow-unauthenticated
@@ -35,6 +34,7 @@ steps:
         gcloud "${ARGS[@]}"
 
 substitutions:
+  _IMAGE: "${_ARTIFACT_REGISTRY_URL}/${_IMAGE_NAME}:${SHORT_SHA}"
   _ARTIFACT_REGISTRY_URL: europe-west1-docker.pkg.dev/REPLACE-WITH-PROJECT-ID/market
   _IMAGE_NAME: ws-gateway
   _SERVICE_NAME: market-ws-gateway
