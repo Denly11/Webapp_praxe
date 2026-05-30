@@ -24,7 +24,7 @@ steps:
           --region "${_REGION}"
           --platform managed
           --allow-unauthenticated
-          --set-env-vars "REDIS_URL=${_REDIS_URL},REDIS_PREFIX=${_REDIS_PREFIX}"
+          --set-env-vars "REDIS_URL=${_REDIS_URL},REDIS_PREFIX=${_REDIS_PREFIX},API_URL=${_API_URL}"
         )
 
         if [[ -n "${_VPC_CONNECTOR}" ]]; then
@@ -41,6 +41,7 @@ substitutions:
   _REGION: europe-west1
   _REDIS_URL: redis://10.0.0.3:6379
   _REDIS_PREFIX: "market:"
+  _API_URL: https://api-818602379481.europe-west3.run.app
   _VPC_CONNECTOR: ''
   _VPC_EGRESS: private-ranges-only
 
